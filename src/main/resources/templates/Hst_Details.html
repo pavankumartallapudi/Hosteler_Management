@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Hostelers List</title>
+    <style>
+	@import url('https://fonts.googleapis.com/css2?family=Tomorrow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Wittgenstein:ital,wght@0,400..900;1,400..900&display=swap');	        
+	body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+			column-gap: 10px;
+        }
+        td, th {
+            border: 2px solid white;
+            border-collapse: collapse;
+            padding: 5px;
+            color: white;
+            text-align: center;
+            border-radius: 12px;
+            font-size: 20px;
+			font-family: Tomorrow;
+        }
+        table {
+            border: transparent;
+            border-spacing: 10px;
+        }
+        #vid {
+            position: fixed;
+            right: 0;
+            bottom: 0;
+            min-width: 100%;
+            filter: blur(2px);
+            min-height: 100%;
+            z-index: -1;
+        }
+        h1 {
+            color: white;
+            font-size: 40px;
+			font-family: Wittgenstein;
+        }
+		tr:hover{
+			background-color:rgb(46, 204, 113 )
+;
+		}
+		button{
+		       background:transparent;
+		       padding:10px ;    
+		       border:2px solid white;  
+		       border-radius:7px;
+		       color:white; 
+		       font-size:18px;
+		 }
+	    button:hover{
+			    background:white;
+			    color:black;
+			    font-size:20px;
+		}
+		#imagePopup {
+               display: none;
+               position: absolute;
+               top: 50%;
+               left: 50%;
+               transform: translate(-50%, -50%);
+               background-color: white;
+               padding:20px;
+               border-radius: 8px;
+               box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+               z-index: 1000;
+               justify-content: center;
+               align-items: center;
+              flex-direction: column;
+               row-gap: 10px;
+               row-gap: 30px;
+               border:4px solid black;
+			}
+					   
+            /* Overlay styles */
+	           #overlay {
+               display: none;
+               position: absolute;
+               top: 0;
+               left: 0;
+               width: 100%;
+               height: 100%;
+               background-color: transparent;
+               z-index: 500;
+               padding-right: 10px;
+               
+		    }
+		   #b1{
+	          border:2px solid black;
+	          padding:7px;
+	          color:black;
+		    }
+			#b1:hover{
+	          background:black;
+	          color:white;
+	          font-size:22px;
+	        }
+			#form1{
+				display: flex;
+				column-gap: 10px;
+			}
+			#b2{
+	          border:2px solid rgb(255, 0, 0);
+	          padding:7px;
+	          color:black;
+		    }
+			#i23{
+			                width:55px;
+			                height: 55px;
+			                border-radius: 29px;
+			            }
+			#b2:hover{
+				border:2px solid rgb(0, 128, 255);
+	          background:rgb(255, 0, 0);
+	          color:white;
+	          font-size:22px;
+	        }
+			input{
+				padding:10px;
+				border:2px solid black;
+			}
+					  
+    </style>
+</head>
+<body>
+    <video autoplay loop muted id="vid">
+        <source src="https://videos.pexels.com/video-files/7578540/7578540-uhd_2560_1440_30fps.mp4"> 
+    </video>
+    <h1>Hostelers List</h1>
+    <div>
+        <table border="1" id="hosteler-table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Fathers Name</th>
+                    <th>Date Of Birth</th>
+                    <th>Date Of Joining</th>
+					<th>Room Number</th>
+                    <th>Phone Number</th>
+                    <th>Address</th>
+					<th>Sharing</th>
+                    <th>Father Mobile Number</th>
+                    <th>Qualification</th>
+                    <th>Days Left</th> <!-- Added a new column for Days Left -->
+					<th>Alert</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="i : ${details}">
+                    <td th:text="${i.name}"></td>
+                    <td th:text="${i.fathersName}"></td>
+                    <td th:text="${i.dob}"></td>
+                    <td th:text="${i.doj}" class="joining-date" data-date="${i.doj}"></td> <!-- Joining date with class -->
+					<td th:text="${i.room_No}"></td>
+                    <td th:text="${i.mobileNumber}" class="mobile-number" ></td>
+                    <td th:text="${i.address}"></td>
+					<td th:text="${i.sharing}"></td>
+                    <td th:text="${i.fatherMobileNumber}"></td>
+                    <td th:text="${i.qualification}"></td>
+                    <td class="days-left">Calculating...</td> <!-- Placeholder for Days Left -->
+					<td class="alert" >
+					        <a href="#" target="_blank">
+					            <img src="https://thumbs.dreamstime.com/b/whatsapp-icon-isolated-white-vector-file-included-whatsapp-flat-icon-164609425.jpg" id="i23" >
+					        </a>
+					    </td>
+                </tr>
+            </tbody>
+        </table>
+		
+    </div>
+	<div id="but">
+		<a href="/Home_page"><button>Home</button></a>
+		<button onclick="showImage()">Remove</button>
+		
+		  
+	</div>
+	<!-- Overlay -->
+			  <div id="overlay" onclick="hideImage()"></div>
+			  <div id="imagePopup">
+				<form action="/delete_hosteler" id="form1" method="post">
+					<input type="text" placeholder="enter your mobile number" name="mobileNumber" required>
+					<button type="submit" value="delete"  id="b2">Delete</button>
+				</form>
+				<button onclick=hideImage() id="b1">close</button>
+			  </div>
+    <script>
+		
+		function showImage() {
+		        document.getElementById('imagePopup').style.display = 'flex';
+		        document.getElementById('overlay').style.display = 'block';
+		    }
+
+		    function hideImage() {
+		        document.getElementById('imagePopup').style.display = 'none';
+		        document.getElementById('overlay').style.display = 'none';
+		    }
+        function formatDate(dateString) {
+            const dateParts = dateString.split('-');
+            const year = dateParts[0];
+            const monthIndex = parseInt(dateParts[1]) - 1;
+            const day = dateParts[2];
+
+            const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+            return `${day.padStart(2, '0')}-${monthNames[monthIndex]}-${year}`;
+        }
+
+        function calculateDaysLeft(joiningDateStr) {
+            const joiningDate = new Date(joiningDateStr);
+            const today = new Date();
+            
+            // Calculate the next due date based on the joining date
+            const nextDueDate = new Date(joiningDate);
+            while (nextDueDate <= today) {
+                nextDueDate.setMonth(nextDueDate.getMonth() + 1);
+            }
+
+            // Calculate the difference in days
+            const timeDifference = nextDueDate - today;
+            const daysLeft = Math.ceil(timeDifference / (1000 * 60 * 60 * 24));
+
+            return daysLeft+1;
+        }
+
+        function formatJoiningDatesAndCalculateDaysLeft() {
+            const rows = Array.from(document.querySelectorAll('#hosteler-table tbody tr'));
+
+            rows.forEach(row => {
+                const joiningDateCell = row.querySelector('td.joining-date');
+                const joiningDateText = joiningDateCell.innerText;
+                const formattedJoiningDate = formatDate(joiningDateText);
+                joiningDateCell.innerText = formattedJoiningDate;
+
+                // Calculate and update days left
+                const daysLeftCell = row.querySelector('.days-left');
+                const daysLeft = calculateDaysLeft(joiningDateText);
+                daysLeftCell.innerText = daysLeft;
+				
+				// Update the WhatsApp alert link with the hosteler's mobile number
+		        const mobileNumber = row.querySelector('.mobile-number').innerText;
+		        const alertCell = row.querySelector('.alert a');
+		        const whatsappLink = `https://wa.me/91${mobileNumber}?text=You%20need%20to%20pay%20your%20fees%20tomorrow`;
+		        alertCell.href = whatsappLink;
+            });
+
+            // Sort rows based on the days left
+            rows.sort((a, b) => {
+                const daysLeftA = parseInt(a.querySelector('.days-left').innerText);
+                const daysLeftB = parseInt(b.querySelector('.days-left').innerText);
+                return daysLeftA - daysLeftB;
+				
+			
+            });
+
+            // Append sorted rows to the table body
+            const tbody = document.querySelector('#hosteler-table tbody');
+            rows.forEach(row => tbody.appendChild(row));
+        }
+
+        document.addEventListener('DOMContentLoaded', formatJoiningDatesAndCalculateDaysLeft);
+    </script>
+</body>
+</html>

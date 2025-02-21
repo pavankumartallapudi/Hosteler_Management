@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Hosteler Details</title>
+    <style>
+	@import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
+	@import url('https://fonts.googleapis.com/css2?family=Signika+Negative:wght@300..700&display=swap');
+	@import url('https://fonts.googleapis.com/css2?family=Domine:wght@400..700&display=swap');
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction:column;
+            row-gap:15px
+        }
+        input {
+            background: transparent;
+            border: 2px solid white;
+            padding: 10px;
+            border-radius: 6px;
+            color: white;
+            outline: none;
+            font-size:22px;
+        }
+        ::placeholder {
+            color: white;
+        }
+        #vid {
+            position: fixed;
+            right: 0;
+            bottom: 0;
+            min-width: 100%;
+            filter: blur(2px);
+            min-height: 100%;
+            z-index: -1;
+        }
+        h1 {
+            color: white;
+            font-size: 40px;
+            font-family:Varela Round;
+            padding-top:60px;
+        }
+        p{
+        color:white;
+        font-size:25px;
+        font-family:Domine;
+       
+        }
+        #det{
+         border-radius:15px;
+         border:5px solid black;
+         padding:16px;
+        }
+        strong{
+         color:black;
+         font-family:Signika Negative;
+        }
+        #imagePopup {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding:20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+           flex-direction: column;
+            row-gap: 10px;
+            row-gap: 30px;
+            border:4px solid black;
+        }
+        button{
+        background:transparent;
+        padding:10px ;    
+        border:2px solid white;  
+        border-radius:7px;
+        color:white; 
+        font-size:18px;
+        }
+       #imagePopup img {
+            width: 200px;
+            height: auto;
+            border-radius: 8px;
+            border: 2px solid black;
+        }
+        /* Overlay styles */
+        #overlay {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: transparent;
+            z-index: 500;
+            padding-right: 10px;
+            
+        }
+        #s1,#s2,#s3,#s4,#s5,#s6{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+           
+            
+            flex-direction: column;
+        }
+        #main{
+            display: flex;
+            column-gap:20px;
+        }
+        #b1{
+        border:2px solid black;
+        padding:7px;
+        color:black;
+        }
+        button:hover{
+        background:white;
+        color:black;
+        font-size:20px;
+        }
+        #b1:hover{
+        background:black;
+        color:white;
+        font-size:22px;
+        }
+        #home{
+        display:flex;
+        column-gap:250px;
+        }
+    </style>
+</head>
+<body>
+
+    <video autoplay loop muted id="vid">
+        <source src="https://videos.pexels.com/video-files/8085789/8085789-uhd_2732_1440_25fps.mp4"> 
+    </video>
+    <h1>Hosteler Details</h1>
+    <form action="/getHostelerDetails" method="get">
+        <input type="text" name="mobileNumber" placeholder="Enter Your Mobile Number" required>
+        <input type="submit" value="Get Details">
+    </form>
+    <div th:if="${hosteler != null}" id="det">
+        <p><strong>Name:</strong> <span th:text="${hosteler.name}"></span></p>
+        <p><strong>Father's Name:</strong> <span th:text="${hosteler.fathersName}"></span></p>
+        <p><strong>Date Of Birth:</strong> <span th:text="${hosteler.dob}"></span></p>
+        <p><strong>Date Of Joining:</strong> <span th:text="${hosteler.doj}" class="joining-date"></span></p>
+        <p><strong>Room Number:</strong> <span th:text="${hosteler.room_No}"></span></p>
+        <p><strong>Phone Number:</strong> <span th:text="${hosteler.mobileNumber}"></span></p>
+        <p><strong>Address:</strong> <span th:text="${hosteler.address}"></span></p>
+         <p><strong>Sharing:</strong> <span th:text="${hosteler.sharing}"></span></p>
+        <p><strong>Father's Mobile Number:</strong> <span th:text="${hosteler.fatherMobileNumber}"></span></p>
+        <p><strong>Qualification:</strong> <span th:text="${hosteler.qualification}"></span></p>
+        <p><strong>Days Left:</strong> <span id="days-left"></span></p>
+        <div id="home">
+          <button onclick="showImage()">Pay Fee</button>
+          <a href="/Home_page"><button>Home</button></a>
+        </div>
+
+    <!-- Overlay -->
+    <div id="overlay" onclick="hideImage()"></div>
+
+    <!-- Image Popup Container -->
+    <div id="imagePopup">
+        <div id="main">
+        <div id="s1">
+                <h2>1-sharing</h2>
+                <img src="images/1s.jpg">
+        </div>
+        <div id="s2">
+                <h2>2-sharing</h2>
+                <img src="images/2s.jpg">
+                
+        </div>
+        <div id="s3">
+                <h2>3-sharing</h2>
+                <img src="images/3s.jpg">
+                
+        </div>
+        <div id="s4">
+                <h2>4-sharing</h2>
+                <img src="images/4s.jpg">
+                
+        </div>
+        <div id="s5">
+                <h2>5-sharing</h2>
+                <img src="images/5s.jpg">
+                
+        </div>
+        <div id="s6">
+                <h2>6-sharing</h2>
+                <img src="images/6s.jpg">
+                
+        </div>
+    </div>
+    <button onclick=hideImage() id="b1">close</button>
+
+    </div>
+    <script>
+    function showImage() {
+        document.getElementById('imagePopup').style.display = 'flex';
+        document.getElementById('overlay').style.display = 'block';
+    }
+
+    function hideImage() {
+        document.getElementById('imagePopup').style.display = 'none';
+        document.getElementById('overlay').style.display = 'none';
+    }
+        function formatDate(dateString) {
+            const dateParts = dateString.split('-');
+            const year = dateParts[0];
+            const monthIndex = parseInt(dateParts[1]) - 1;
+            const day = dateParts[2];
+
+            const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+            return `${day.padStart(2, '0')}-${monthNames[monthIndex]}-${year}`;
+        }
+
+        function calculateDaysLeft(joiningDateStr) {
+            const joiningDate = new Date(joiningDateStr);
+            const today = new Date();
+            
+            // Calculate the next due date based on the joining date
+            const nextDueDate = new Date(joiningDate);
+            while (nextDueDate <= today) {
+                nextDueDate.setMonth(nextDueDate.getMonth() + 1);
+            }
+
+            // Adjust the timeDifference calculation to include the last date
+            const timeDifference = nextDueDate.getTime() - today.getTime();
+            const daysLeft = Math.floor(timeDifference / (1000 * 60 * 60 * 24)) + 1;
+
+            return daysLeft;
+        }
+
+        function updateHostelerDetails() {
+            const joiningDateElement = document.querySelector('.joining-date');
+            const joiningDateText = joiningDateElement.textContent.trim();
+            const formattedJoiningDate = formatDate(joiningDateText);
+            joiningDateElement.textContent = formattedJoiningDate;
+
+            // Calculate and display the days left
+            const daysLeft = calculateDaysLeft(joiningDateText);
+            document.getElementById('days-left').textContent = daysLeft;
+        }
+
+        document.addEventListener('DOMContentLoaded', updateHostelerDetails);
+    </script>
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+	<style>
+		@import url('https://fonts.googleapis.com/css2?family=Satisfy&display=swap');
+		@import url('https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&family=Satisfy&display=swap');
+		@import url('https://fonts.googleapis.com/css2?family=Charmonman:wght@400;700&display=swap');
+		body{
+			display: flex;
+			justify-content: center;
+			height: 100vh;
+			align-items: center;
+			overflow: hidden;
+			flex-direction: column;
+			row-gap: 22px;
+		}
+		#mian{
+			background-color: blue;
+			display: flex;
+			flex-direction: row;
+		}
+		#s1{
+			background-color: yellow;
+			padding: 200px;
+		}
+		#s2{
+			background-color:red;
+			padding: 200px;
+		}
+		#vid{
+			position: fixed;
+			  right: 0;
+			  bottom: 0;
+			  min-width: 100%;
+			  filter: blur(2px);
+			  min-height: 100%;
+
+			  z-index: -1;
+			}
+			h1{
+				font-size: 70px;
+				align-items: center;
+				color: white;
+				font-family: Satisfy;
+			}
+			
+			a{
+				background: transparent;
+				border: 3px solid white;
+				color: white;
+				
+				font-size: 30px;
+				margin-left: 30px;
+				border-radius: 30px;
+				text-decoration: none;
+				font-family: Kalam;
+				padding-left: 35px;
+				padding-right: 35px;
+
+			}
+			a:hover{
+				font-size: 35px;
+			}
+			#buttons{
+				margin-top: 0px;
+			}
+			#i1{
+				font-family: Charmonman;
+				text-align: right;
+				display: inline-block;
+				width: 100%;
+			}
+			
+
+		
+	</style>
+</head>
+<body>
+	<h1 id="i1">HostNroll.</h1>
+	<video autoplay loop muted id="vid">
+		<source src="https://videos.pexels.com/video-files/3770033/3770033-hd_1920_1080_25fps.mp4"> 
+	</video>
+	<h1>
+		"Welcome to Your Home,
+		Away from Home.<br>
+		Enroll,Settle Enjoy."
+	</h1>
+	<div id="buttons">
+		<a href="/register">Register</a>
+		<a href="/owner_login">Owner</a>
+		<a href="/get_details">get details</a>
+	</div>
+	
+
+
+
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="css/styles.css">
+	<title></title>
+</head>
+<body>	
+<h1 id="l1">hey!</h1>
+			     <form th:action="@{/register_user}" th:object="${hosteler}" method="post" id="form1">
+			        	<div id="section1">
+					        	<div id="i1">
+						            <label for="name">Name:</label><br>
+						            <input type="text" id="i11" name="name" required>
+					            </div>
+					            <div id="i2">
+						            <label for="fathersName">Father's Name:</label><br>
+						            <input type="text" id="i22" name="fathersName" required>
+					            </div>
+					            <div id="i3">
+						            <label for="dob">Date of Birth:</label><br>
+						            <input type="date" id="i33" name="dob" required>
+					            </div>
+					            <div id="i4">
+						            <label for="doj">Date of Joining:</label><br>
+						            <input type="date" id="i44" name="doj" required>
+						        </div>
+								<div id="i9">
+														            <label for="doj">Sharing:</label><br>
+														            <input type="number" id="i99" name="sharing" required>
+								</div>
+								
+						</div>
+			        <div id="section2">
+				        <div id="i5">
+				            <label for="mobileNumber">Mobile Number:</label><br>
+				            <input type="tel" id="i55" name="mobileNumber" pattern="[0-9]{10}" required>
+			            </div>
+						<div id="i10">
+								<label for="RoomNo">Room Number:</label><br>
+								<input type="text" id="i100" name="room_No"  required>
+						</div>
+			            <div id="i6">
+				            <label for="address">Address:</label><br>
+				            <textarea id="i66" name="address" rows="4" required></textarea>
+			            </div>
+			            <div id="i7">
+				            <label for="fatherMobileNumber">Father's Mobile Number:</label><br>
+				            <input type="tel" id="i77" name="fatherMobileNumber" pattern="[0-9]{10}" required>
+			            </div>
+			            <div id="i8">
+				            <label for="qualification">Qualification:</label><br>
+				            <input type="text" id="i88" name="qualification" required>
+			            </div>
+			            <input type="submit" value="Register" id="submitb" onclick="alert1()">
+			            
+		        	</div>
+		        
+		      
+	
+		        </form>
+		        
+
+		<script >
+			function alert1(){
+				window.alert("detils submitted succesfully");
+			}
+		</script>
+</body>
+</html>

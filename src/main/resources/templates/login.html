@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>
+		
+	</title>
+	<style>
+		body{
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			height: 100vh;
+			flex-direction: column;
+			overflow: hidden;
+			row-gap:18px;
+		}
+		#main{
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			border:2px solid white;
+			padding: 20px;
+			border-radius: 9px;
+			row-gap: 13px;
+		}
+		.i1{
+			padding: 12px;
+			border:2px solid white;
+			outline: none;
+			border-radius: 6px;
+			font-size: 20px;
+		}
+		#vid{
+			position: fixed;
+			  right: 0;
+			  bottom: 0;
+			  min-width: 100%;
+			  filter: blur(2px);
+			  min-height: 100%;
+
+			  z-index: -1;
+			}
+			#i2{
+				padding: 10px;
+				width:30%;
+				background: transparent;
+				border: 3px solid white;
+				border-radius: 6px;
+				color: white;
+			}
+			h1{
+				color: white;
+			}
+			#i2:hover{
+				background-color: white;
+				color: black;
+				font-size: 20px;
+			}
+			button{
+		       background:transparent;
+		       padding:10px ;    
+		       border:2px solid white;  
+		       border-radius:7px;
+		       color:white; 
+		       font-size:18px;
+		       }
+			   button:hover{
+			          background:white;
+			          color:black;
+			          font-size:20px;
+			          }
+	</style>
+</head>
+<body>
+	<video autoplay loop muted id="vid">
+		<source src="https://videos.pexels.com/video-files/3773486/3773486-hd_1920_1080_30fps.mp4"> 
+	</video>
+	<h1>Owners Login</h1>
+	<div >
+	  <form action="login.jsp"  id="main" method="post">
+		<label for="username"></label>
+		<input type="text" name="username" id="user" placeholder="username" class="i1" required>
+		<label for="pass"></label>
+		<input type="password" name="pass" placeholder="password" class="i1" required>
+		<input type="submit" value="login" id="i2">
+	</form>
+	</div>
+	<a href="/Home_page"><button>Home</button></a>
+</body>
+</html>
